@@ -36,6 +36,17 @@ class DBHelper():
         self.conn.close()
         showStudent(self.list)
 
+    def deleteRecord(self,sid):
+        try:
+            self.c.execute("DELETE from student WHERE sid="+str(sid))
+            self.conn.commit()
+            self.c.close()
+            self.conn.close()
+            QMessageBox.information(QMessageBox(),'Successful','Student is deleted from the database.')
+        except Exception:
+            QMessageBox.warning(QMessageBox(), 'Error', 'Could not delete student from the database.')
+
+        
 
 class Login(QDialog):
     def __init__(self, parent=None):
@@ -373,8 +384,23 @@ class Window(QMainWindow):
         self.dialog.setWindowTitle("Enter Roll No")
         self.dialog.setLayout(self.vbox)
 
+        self.rollForDelete = 0
+        self.vboxDelete = QVBoxLayout()
+        self.textDelete = QLabel("Enter the roll no of the student")
+        self.editFieldDelete = QLineEdit()
+        self.btnSearchDelete = QPushButton("Search", self)
+        self.btnSearchDelete.clicked.connect(self.deleteRecord)                       #111
+        self.vboxDelete.addWidget(self.textDelete)
+        self.vboxDelete.addWidget(self.editFieldDelete)
+        self.vboxDelete.addWidget(self.btnSearchDelete)
+        self.dialogDelete = QDialog()
+        self.dialogDelete.setWindowTitle("Delete Record")
+        self.dialogDelete.setLayout(self.vboxDelete)
+
+
         self.btnEnterStudent=QPushButton("Enter Student Details",self)
         self.btnShowStudentDetails=QPushButton("Show Student Details",self)
+        self.btnDeleteRecord=QPushButton("Delete record",self)
 
         self.picLabel=QLabel(self)
         self.picLabel.resize(150,150)
@@ -388,6 +414,13 @@ class Window(QMainWindow):
         self.btnEnterStudentFont.setPointSize(13)
         self.btnEnterStudent.setFont(self.btnEnterStudentFont)
         self.btnEnterStudent.clicked.connect(self.enterstudent)
+
+        self.btnDeleteRecord.move(205,170)
+        self.btnDeleteRecord.resize(180, 40)
+        self.btnDeleteRecordFont = self.btnEnterStudent.font()
+        self.btnDeleteRecordFont.setPointSize(13)
+        self.btnDeleteRecord.setFont(self.btnDeleteRecordFont)
+        self.btnDeleteRecord.clicked.connect(self.showDeleteDialog)                                   #2222
 
         self.btnShowStudentDetails.move(15, 220)
         self.btnShowStudentDetails.resize(180, 40)
@@ -404,6 +437,9 @@ class Window(QMainWindow):
 
     def showStudentDialog(self):
         self.dialog.exec()
+
+    def showDeleteDialog(self):
+        self.dialogDelete.exec()
     
     def showStudent(self):
         if self.editField.text() is "":
@@ -411,6 +447,14 @@ class Window(QMainWindow):
             return None
         showstudent = DBHelper()
         showstudent.searchStudent(int(self.editField.text()))
+
+    def deleteRecord(self):
+        if self.editField.text() is "":
+            QMessageBox.warning(QMessageBox(), 'Error','You must give the roll number to show the results for.')
+            return None
+        delrecord = DBHelper()
+        delrecord.deleteRecord(int(self.editFieldDelete.text()))
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
