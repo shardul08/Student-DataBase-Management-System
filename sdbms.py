@@ -342,14 +342,15 @@ class AddStudent(QDialog):
         self.grid.addWidget(self.btnAdd,9,2)
 
         self.btnAdd.clicked.connect(self.addStudent)
-        self.btnCancel.clicked.connect(QApplication.instance().quit)
+        self.btnCancel.clicked.connect(self.Close)
         self.btnReset.clicked.connect(self.reset)
         
         self.setLayout(self.grid)
         self.setWindowTitle("Add Student Details")
         self.resize(500,300)
-        self.show()
-        sys.exit(self.exec())
+
+    def Close(self):
+    	self.close()
 
     def reset(self):
         self.rollText.setText("")
@@ -434,6 +435,7 @@ class Window(QMainWindow):
 
     def enterstudent(self):
         enterStudent=AddStudent()
+        enterStudent.exec()
 
     def showStudentDialog(self):
         self.dialog.exec()
