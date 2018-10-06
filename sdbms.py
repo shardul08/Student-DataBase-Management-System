@@ -390,7 +390,7 @@ class Window(QMainWindow):
         self.textDelete = QLabel("Enter the roll no of the student")
         self.editFieldDelete = QLineEdit()
         self.btnSearchDelete = QPushButton("Search", self)
-        self.btnSearchDelete.clicked.connect(self.deleteRecord)                       #111
+        self.btnSearchDelete.clicked.connect(self.deleteRecord)                       
         self.vboxDelete.addWidget(self.textDelete)
         self.vboxDelete.addWidget(self.editFieldDelete)
         self.vboxDelete.addWidget(self.btnSearchDelete)
@@ -421,7 +421,7 @@ class Window(QMainWindow):
         self.btnDeleteRecordFont = self.btnEnterStudent.font()
         self.btnDeleteRecordFont.setPointSize(13)
         self.btnDeleteRecord.setFont(self.btnDeleteRecordFont)
-        self.btnDeleteRecord.clicked.connect(self.showDeleteDialog)                                   #2222
+        self.btnDeleteRecord.clicked.connect(self.showDeleteDialog)                                   
 
         self.btnShowStudentDetails.move(15, 220)
         self.btnShowStudentDetails.resize(180, 40)
@@ -430,7 +430,7 @@ class Window(QMainWindow):
         self.btnShowStudentDetails.setFont(self.btnShowStudentDetailsFont)
         self.btnShowStudentDetails.clicked.connect(self.showStudentDialog)
 
-        self.resize(400,280)
+        self.setFixedSize(400,280)
         self.setWindowTitle("Student Database Management System")
 
     def enterstudent(self):
