@@ -1,6 +1,7 @@
 import sys,sqlite3,time
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget,QComboBox,QVBoxLayout,QGridLayout,QDialog,QWidget, QPushButton, QApplication, QMainWindow,QAction,QMessageBox,QLabel,QTextEdit,QProgressBar,QLineEdit
+from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget,QComboBox,QVBoxLayout,QGridLayout,QDialog,QWidget, \
+QPushButton, QApplication, QMainWindow,QAction,QMessageBox,QLabel,QTextEdit,QProgressBar,QLineEdit, QHBoxLayout
 from PyQt5.QtCore import QCoreApplication
 
 class DBHelper():
@@ -398,6 +399,7 @@ class Window(QMainWindow):
         self.dialogDelete.setWindowTitle("Delete Record")
         self.dialogDelete.setLayout(self.vboxDelete)
 
+        layout = QGridLayout() # Using a GridLayout to allow the widget to be resized 
 
         self.btnEnterStudent=QPushButton("Enter Student Details",self)
         self.btnShowStudentDetails=QPushButton("Show Student Details",self)
@@ -408,6 +410,7 @@ class Window(QMainWindow):
         self.picLabel.move(120,10)
         self.picLabel.setScaledContents(True)
         self.picLabel.setPixmap(QtGui.QPixmap("user.png"))
+        layout.addWidget(self.picLabel, 0, 0) # Choose row and column for every widget
 
         self.btnEnterStudent.move(15,170)
         self.btnEnterStudent.resize(180,40)
@@ -415,13 +418,15 @@ class Window(QMainWindow):
         self.btnEnterStudentFont.setPointSize(13)
         self.btnEnterStudent.setFont(self.btnEnterStudentFont)
         self.btnEnterStudent.clicked.connect(self.enterstudent)
+        layout.addWidget(self.btnEnterStudent, 1, 0) 
 
         self.btnDeleteRecord.move(205,170)
         self.btnDeleteRecord.resize(180, 40)
         self.btnDeleteRecordFont = self.btnEnterStudent.font()
         self.btnDeleteRecordFont.setPointSize(13)
         self.btnDeleteRecord.setFont(self.btnDeleteRecordFont)
-        self.btnDeleteRecord.clicked.connect(self.showDeleteDialog)                                   #2222
+        self.btnDeleteRecord.clicked.connect(self.showDeleteDialog)  
+        layout.addWidget(self.btnDeleteRecord, 1, 1)                                 #2222
 
         self.btnShowStudentDetails.move(15, 220)
         self.btnShowStudentDetails.resize(180, 40)
@@ -429,6 +434,11 @@ class Window(QMainWindow):
         self.btnShowStudentDetailsFont.setPointSize(13)
         self.btnShowStudentDetails.setFont(self.btnShowStudentDetailsFont)
         self.btnShowStudentDetails.clicked.connect(self.showStudentDialog)
+        layout.addWidget(self.btnShowStudentDetails, 2, 0)
+        
+        w = QWidget()
+        w.setLayout(layout)
+        self.setCentralWidget(w) # setting the layout to central window
 
         self.resize(400,280)
         self.setWindowTitle("Student Database Management System")
