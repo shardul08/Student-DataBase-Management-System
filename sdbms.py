@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget,QComboBox,QVBoxLayout,
 QPushButton, QApplication, QMainWindow,QAction,QMessageBox,QLabel,QTextEdit,QProgressBar,QLineEdit, QHBoxLayout
 from PyQt5.QtCore import QCoreApplication
 
+
+#Added a line for no reason
 class DBHelper():
     def __init__(self):
         self.conn=sqlite3.connect("sdms.db")
