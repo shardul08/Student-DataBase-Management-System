@@ -1,0 +1,46 @@
+-- Create the database
+CREATE DATABASE StudentDB;
+
+-- Use the database
+USE StudentDB;
+
+-- Create the Students table
+CREATE TABLE Students (
+    StudentID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    DateOfBirth DATE,
+    Email VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- Create the Courses table
+CREATE TABLE Courses (
+    CourseID INT AUTO_INCREMENT PRIMARY KEY,
+    CourseName VARCHAR(100) NOT NULL,
+    Credits INT NOT NULL
+);
+
+-- Create the Enrollments table
+CREATE TABLE Enrollments (
+    EnrollmentID INT AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    EnrollmentDate DATE,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+-- Insert some sample data into Students
+INSERT INTO Students (FirstName, LastName, DateOfBirth, Email) VALUES
+('John', 'Doe', '2000-01-15', 'john.doe@example.com'),
+('Jane', 'Smith', '1999-11-23', 'jane.smith@example.com');
+
+-- Insert some sample data into Courses
+INSERT INTO Courses (CourseName, Credits) VALUES
+('Introduction to Programming', 3),
+('Database Systems', 4);
+
+-- Insert some sample data into Enrollments
+INSERT INTO Enrollments (StudentID, CourseID, EnrollmentDate) VALUES
+(1, 1, '2024-07-01'),
+(2, 2, '2024-07-01');
