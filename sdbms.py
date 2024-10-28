@@ -68,13 +68,13 @@ class Login(QDialog):
         self.setWindowTitle("Login")
 
 
-    def handleLogin(self):
-        if (self.textName.text() == '' and
-            self.textPass.text() == ''):
-            self.accept()
-        else:
-            QMessageBox.warning(
-                self, 'Error', 'Bad user or password')
+def handleLogin(self):
+    username = self.textName.text()
+    password = self.textPass.text()
+    if not username or not password:
+        QMessageBox.warning(self, 'Error', 'Username and password cannot be empty.')
+    else:
+        self.accept()
 
 
 def showStudent(list):
