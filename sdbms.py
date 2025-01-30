@@ -89,112 +89,36 @@ def showStudent(list):
     sid=list[0]
     sname=list[1]
 
-    if list[2]==0:
-        dept="Mechanical Engineering"
-    elif list[2]==1:
-        dept="Chemical Engineering"
-    elif list[2]==2:
-        dept="Software Engineering"
-    elif list[2]==3:
-        dept="Biotech Engineering"
-    elif list[2]==4:
-        dept="Computer Science and Engineering"
-    elif list[2]==5:
-        dept="Information Technology"
+department_map = {
+    0: "Mechanical Engineering",
+    1: "Chemical Engineering",
+    2: "Software Engineering",
+    3: "Biotech Engineering",
+    4: "Computer Science and Engineering",
+    5: "Information Technology"
+}
 
-    if list[3]==0:
-        year="1st"
-    elif list[3]==1:
-        year="2nd"
-    elif list[3]==2:
-        year="3rd"
-    elif list[3]==3:
-        year="4th"
+year_map = {
+    0: "1st",
+    1: "2nd",
+    2: "3rd",
+    3: "4th"
+}
 
-    if list[4]==0:
-        course_a="DBMS"
-    elif list[4]==1:
-        course_a="OS"
-    elif list[4]==2:
-        course_a="CN"
-    elif list[4]==3:
-        course_a="C++"
-    elif list[4]==4:
-        course_a="JAVA"
-    elif list[4]==5:
-        course_a="PYTHON"
-    elif list[4]==6:
-        course_a="THERMO"
-    elif list[4]==7:
-        course_a="MACHINE"
-    elif list[4]==8:
-        course_a="CELLS"
-    elif list[4]==9:
-        course_a="DS"
-    elif list[4]==10:
-        course_a="CRE"
-    elif list[4]==11:
-        course_a="MICROBES"
-    elif list[4]==12:
-        course_a="FERTILIZER"
+course_map = {
+    0: "DBMS", 1: "OS", 2: "CN", 3: "C++", 4: "JAVA", 5: "PYTHON",
+    6: "THERMO", 7: "MACHINE", 8: "CELLS", 9: "DS", 10: "CRE", 
+    11: "MICROBES", 12: "FERTILIZER", 13: "PLANTS", 14: "MOBILE APP"
+}
 
-    if list[5]==0:
-        course_b="DBMS"
-    elif list[5]==1:
-        course_b="OS"
-    elif list[5]==2:
-        course_b="CN"
-    elif list[5]==3:
-        course_b="C++"
-    elif list[5]==4:
-        course_b="JAVA"
-    elif list[5]==5:
-        course_b="PYTHON"
-    elif list[5]==6:
-        course_b="THERMO"
-    elif list[5]==7:
-        course_b="MACHINE"
-    elif list[5]==8:
-        course_b="CELLS"
-    elif list[5]==9:
-        course_b="DS"
-    elif list[5]==10:
-        course_b="CRE"
-    elif list[5]==11:
-        course_b="MICROBES"
-    elif list[5]==12:
-        course_b="FERTILIZER"
+sid, sname = student_list[0], student_list[1]
+dept = department_map.get(student_list[2], "Unknown Department")
+year = year_map.get(student_list[3], "Unknown Year")
 
-    if list[6]==0:
-        course_c="DBMS"
-    elif list[6]==1:
-        course_c="OS"
-    elif list[6]==2:
-        course_c="CN"
-    elif list[6]==3:
-        course_c="C++"
-    elif list[6]==4:
-        course_c="JAVA"
-    elif list[6]==5:
-        course_c="PYTHON"
-    elif list[6]==6:
-        course_c="THERMO"
-    elif list[6]==7:
-        course_c="MACHINE"
-    elif list[6]==8:
-        course_c="CELLS"
-    elif list[6]==9:
-        course_c="DS"
-    elif list[6]==10:
-        course_c="CRE"
-    elif list[6]==11:
-        course_c="MICROBES"
-    elif list[6]==12:
-        course_c="FERTILIZER"
-    elif list[6]==13:
-        course_c="PLANTS"
-    elif list[6]==14:
-        course_c="MOBLIE APP"
+course_a = course_map.get(student_list[4], "Unknown Course")
+course_b = course_map.get(student_list[5], "Unknown Course")
+course_c = course_map.get(student_list[6], "Unknown Course")
+
 
 
     table=QTableWidget()
